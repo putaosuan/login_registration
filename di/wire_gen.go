@@ -8,16 +8,20 @@ package di
 
 import (
 	"github.com/go-kirito/pkg/application"
-	"login_registration/api/login"
-	"login_registration/internal/login_registration/usecase"
+	"login_registration/api/user"
+	"login_registration/internal/user/domain/service"
+	"login_registration/internal/user/repository"
+	"login_registration/internal/user/usecase"
 )
 
 // Injectors from wire.go:
 
 func MakeUseCase() (*UseCases, error) {
-	iLoginUseCase := usecase.NewLoginUseCase()
+	iUserRepo := repository.NewUserRepo()
+	iUserService := service.NewUserService(iUserRepo)
+	iUserUseCase := usecase.NewUserUseCase(iUserService)
 	useCases := &UseCases{
-		iloginusecase0: iLoginUseCase,
+		iuserusecase0: iUserUseCase,
 	}
 	return useCases, nil
 }
@@ -25,7 +29,7 @@ func MakeUseCase() (*UseCases, error) {
 // wire.go:
 
 type UseCases struct {
-	iloginusecase0 login.ILoginUseCase
+	iuserusecase0 user.IUserUseCase
 }
 
 func RegisterService(app application.Application) error {
@@ -33,6 +37,6 @@ func RegisterService(app application.Application) error {
 	if err != nil {
 		return err
 	}
-	login.RegisterLoginServer(app, uc.iloginusecase0)
+	user.RegisterUserServer(app, uc.iuserusecase0)
 	return nil
 }

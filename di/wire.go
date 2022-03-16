@@ -5,16 +5,18 @@
 package di
 
 import (
-	login0 "login_registration/api/login"
+	user0 "login_registration/api/user"
 
-	usecase_0 "login_registration/internal/login_registration/usecase"
+	service_0 "login_registration/internal/user/domain/service"
+	repository_0 "login_registration/internal/user/repository"
+	usecase_0 "login_registration/internal/user/usecase"
 
 	"github.com/go-kirito/pkg/application"
 	"github.com/google/wire"
 )
 
 type UseCases struct {
-	iloginusecase0 login0.ILoginUseCase
+	iuserusecase0 user0.IUserUseCase
 }
 
 func RegisterService(app application.Application) error {
@@ -23,7 +25,7 @@ func RegisterService(app application.Application) error {
 		return err
 	}
 
-	login0.RegisterLoginServer(app, uc.iloginusecase0)
+	user0.RegisterUserServer(app, uc.iuserusecase0)
 	return nil
 }
 
@@ -31,6 +33,8 @@ func MakeUseCase() (*UseCases, error) {
 	panic(wire.Build(
 		wire.Struct(new(UseCases), "*"),
 
-		usecase_0.NewLoginUseCase,
+		service_0.NewUserService,
+		repository_0.NewUserRepo,
+		usecase_0.NewUserUseCase,
 	))
 }

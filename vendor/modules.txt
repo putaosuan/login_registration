@@ -1,0 +1,235 @@
+# github.com/bwmarrin/snowflake v0.3.0
+github.com/bwmarrin/snowflake
+# github.com/envoyproxy/protoc-gen-validate v0.1.0
+## explicit
+github.com/envoyproxy/protoc-gen-validate/validate
+# github.com/fsnotify/fsnotify v1.4.9
+github.com/fsnotify/fsnotify
+# github.com/go-kirito/pkg v0.0.0-20210824104209-367179c968ee
+## explicit
+github.com/go-kirito/pkg/api/metadata
+github.com/go-kirito/pkg/application
+github.com/go-kirito/pkg/encoding
+github.com/go-kirito/pkg/encoding/form
+github.com/go-kirito/pkg/encoding/json
+github.com/go-kirito/pkg/encoding/proto
+github.com/go-kirito/pkg/encoding/xml
+github.com/go-kirito/pkg/encoding/yaml
+github.com/go-kirito/pkg/errors
+github.com/go-kirito/pkg/internal/context
+github.com/go-kirito/pkg/internal/host
+github.com/go-kirito/pkg/internal/httputil
+github.com/go-kirito/pkg/log
+github.com/go-kirito/pkg/middleware
+github.com/go-kirito/pkg/middleware/recovery
+github.com/go-kirito/pkg/registry
+github.com/go-kirito/pkg/transport
+github.com/go-kirito/pkg/transport/grpc
+github.com/go-kirito/pkg/transport/grpc/resolver/direct
+github.com/go-kirito/pkg/transport/grpc/resolver/discovery
+github.com/go-kirito/pkg/transport/http
+github.com/go-kirito/pkg/transport/http/balancer
+github.com/go-kirito/pkg/transport/http/balancer/random
+github.com/go-kirito/pkg/transport/http/binding
+github.com/go-kirito/pkg/util/id
+github.com/go-kirito/pkg/util/response
+github.com/go-kirito/pkg/zconfig
+github.com/go-kirito/pkg/zdb
+github.com/go-kirito/pkg/zlog
+github.com/go-kirito/pkg/zlog/zap
+# github.com/go-playground/form/v4 v4.1.3
+github.com/go-playground/form/v4
+# github.com/go-sql-driver/mysql v1.6.0
+github.com/go-sql-driver/mysql
+# github.com/golang/protobuf v1.5.2
+github.com/golang/protobuf/proto
+github.com/golang/protobuf/protoc-gen-go/descriptor
+github.com/golang/protobuf/ptypes
+github.com/golang/protobuf/ptypes/any
+github.com/golang/protobuf/ptypes/duration
+github.com/golang/protobuf/ptypes/timestamp
+# github.com/google/uuid v1.2.0
+github.com/google/uuid
+# github.com/google/wire v0.5.0
+## explicit
+github.com/google/wire
+# github.com/gorilla/mux v1.8.0
+github.com/gorilla/mux
+# github.com/hashicorp/hcl v1.0.0
+github.com/hashicorp/hcl
+github.com/hashicorp/hcl/hcl/ast
+github.com/hashicorp/hcl/hcl/parser
+github.com/hashicorp/hcl/hcl/printer
+github.com/hashicorp/hcl/hcl/scanner
+github.com/hashicorp/hcl/hcl/strconv
+github.com/hashicorp/hcl/hcl/token
+github.com/hashicorp/hcl/json/parser
+github.com/hashicorp/hcl/json/scanner
+github.com/hashicorp/hcl/json/token
+# github.com/jinzhu/inflection v1.0.0
+github.com/jinzhu/inflection
+# github.com/jinzhu/now v1.1.2
+github.com/jinzhu/now
+# github.com/magiconair/properties v1.8.5
+github.com/magiconair/properties
+# github.com/mitchellh/mapstructure v1.4.1
+github.com/mitchellh/mapstructure
+# github.com/natefinch/lumberjack v2.0.0+incompatible
+github.com/natefinch/lumberjack
+# github.com/pelletier/go-toml v1.9.3
+github.com/pelletier/go-toml
+# github.com/spf13/afero v1.6.0
+github.com/spf13/afero
+github.com/spf13/afero/mem
+# github.com/spf13/cast v1.3.1
+github.com/spf13/cast
+# github.com/spf13/jwalterweatherman v1.1.0
+github.com/spf13/jwalterweatherman
+# github.com/spf13/pflag v1.0.5
+github.com/spf13/pflag
+# github.com/spf13/viper v1.8.1
+github.com/spf13/viper
+# github.com/subosito/gotenv v1.2.0
+github.com/subosito/gotenv
+# go.opentelemetry.io/otel v1.0.0-RC1
+go.opentelemetry.io/otel/attribute
+go.opentelemetry.io/otel/codes
+go.opentelemetry.io/otel/internal
+# go.opentelemetry.io/otel/trace v1.0.0-RC1
+go.opentelemetry.io/otel/trace
+# go.uber.org/atomic v1.7.0
+go.uber.org/atomic
+# go.uber.org/multierr v1.6.0
+go.uber.org/multierr
+# go.uber.org/zap v1.17.0
+go.uber.org/zap
+go.uber.org/zap/buffer
+go.uber.org/zap/internal/bufferpool
+go.uber.org/zap/internal/color
+go.uber.org/zap/internal/exit
+go.uber.org/zap/zapcore
+# golang.org/x/net v0.0.0-20210614182718-04defd469f4e
+golang.org/x/net/http/httpguts
+golang.org/x/net/http2
+golang.org/x/net/http2/hpack
+golang.org/x/net/idna
+golang.org/x/net/internal/timeseries
+golang.org/x/net/trace
+# golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
+golang.org/x/sync/errgroup
+# golang.org/x/sys v0.0.0-20210630005230-0f9fa26af87c
+golang.org/x/sys/internal/unsafeheader
+golang.org/x/sys/unix
+# golang.org/x/text v0.3.6
+golang.org/x/text/secure/bidirule
+golang.org/x/text/transform
+golang.org/x/text/unicode/bidi
+golang.org/x/text/unicode/norm
+# google.golang.org/genproto v0.0.0-20210629200056-84d6f6074151
+## explicit
+google.golang.org/genproto/googleapis/api/annotations
+google.golang.org/genproto/googleapis/rpc/errdetails
+google.golang.org/genproto/googleapis/rpc/status
+google.golang.org/genproto/protobuf/field_mask
+# google.golang.org/grpc v1.39.0
+## explicit
+google.golang.org/grpc
+google.golang.org/grpc/attributes
+google.golang.org/grpc/backoff
+google.golang.org/grpc/balancer
+google.golang.org/grpc/balancer/base
+google.golang.org/grpc/balancer/grpclb/state
+google.golang.org/grpc/balancer/roundrobin
+google.golang.org/grpc/binarylog/grpc_binarylog_v1
+google.golang.org/grpc/codes
+google.golang.org/grpc/connectivity
+google.golang.org/grpc/credentials
+google.golang.org/grpc/encoding
+google.golang.org/grpc/encoding/proto
+google.golang.org/grpc/grpclog
+google.golang.org/grpc/health
+google.golang.org/grpc/health/grpc_health_v1
+google.golang.org/grpc/internal
+google.golang.org/grpc/internal/backoff
+google.golang.org/grpc/internal/balancerload
+google.golang.org/grpc/internal/binarylog
+google.golang.org/grpc/internal/buffer
+google.golang.org/grpc/internal/channelz
+google.golang.org/grpc/internal/credentials
+google.golang.org/grpc/internal/envconfig
+google.golang.org/grpc/internal/grpclog
+google.golang.org/grpc/internal/grpcrand
+google.golang.org/grpc/internal/grpcsync
+google.golang.org/grpc/internal/grpcutil
+google.golang.org/grpc/internal/metadata
+google.golang.org/grpc/internal/resolver
+google.golang.org/grpc/internal/resolver/dns
+google.golang.org/grpc/internal/resolver/passthrough
+google.golang.org/grpc/internal/resolver/unix
+google.golang.org/grpc/internal/serviceconfig
+google.golang.org/grpc/internal/status
+google.golang.org/grpc/internal/syscall
+google.golang.org/grpc/internal/transport
+google.golang.org/grpc/internal/transport/networktype
+google.golang.org/grpc/keepalive
+google.golang.org/grpc/metadata
+google.golang.org/grpc/peer
+google.golang.org/grpc/reflection
+google.golang.org/grpc/reflection/grpc_reflection_v1alpha
+google.golang.org/grpc/resolver
+google.golang.org/grpc/serviceconfig
+google.golang.org/grpc/stats
+google.golang.org/grpc/status
+google.golang.org/grpc/tap
+# google.golang.org/protobuf v1.27.1
+## explicit
+google.golang.org/protobuf/encoding/protojson
+google.golang.org/protobuf/encoding/prototext
+google.golang.org/protobuf/encoding/protowire
+google.golang.org/protobuf/internal/descfmt
+google.golang.org/protobuf/internal/descopts
+google.golang.org/protobuf/internal/detrand
+google.golang.org/protobuf/internal/encoding/defval
+google.golang.org/protobuf/internal/encoding/json
+google.golang.org/protobuf/internal/encoding/messageset
+google.golang.org/protobuf/internal/encoding/tag
+google.golang.org/protobuf/internal/encoding/text
+google.golang.org/protobuf/internal/errors
+google.golang.org/protobuf/internal/filedesc
+google.golang.org/protobuf/internal/filetype
+google.golang.org/protobuf/internal/flags
+google.golang.org/protobuf/internal/genid
+google.golang.org/protobuf/internal/impl
+google.golang.org/protobuf/internal/order
+google.golang.org/protobuf/internal/pragma
+google.golang.org/protobuf/internal/set
+google.golang.org/protobuf/internal/strs
+google.golang.org/protobuf/internal/version
+google.golang.org/protobuf/proto
+google.golang.org/protobuf/reflect/protodesc
+google.golang.org/protobuf/reflect/protoreflect
+google.golang.org/protobuf/reflect/protoregistry
+google.golang.org/protobuf/runtime/protoiface
+google.golang.org/protobuf/runtime/protoimpl
+google.golang.org/protobuf/types/descriptorpb
+google.golang.org/protobuf/types/known/anypb
+google.golang.org/protobuf/types/known/durationpb
+google.golang.org/protobuf/types/known/fieldmaskpb
+google.golang.org/protobuf/types/known/timestamppb
+google.golang.org/protobuf/types/known/wrapperspb
+# gopkg.in/ini.v1 v1.62.0
+gopkg.in/ini.v1
+# gopkg.in/yaml.v2 v2.4.0
+gopkg.in/yaml.v2
+# gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b
+gopkg.in/yaml.v3
+# gorm.io/driver/mysql v1.1.2
+gorm.io/driver/mysql
+# gorm.io/gorm v1.21.13
+gorm.io/gorm
+gorm.io/gorm/callbacks
+gorm.io/gorm/clause
+gorm.io/gorm/logger
+gorm.io/gorm/migrator
+gorm.io/gorm/schema
+gorm.io/gorm/utils

@@ -43,7 +43,7 @@ func main() {
 	grpcAddress := zconfig.GetString("server.grpc.port")
 
 	if grpcAddress == "" {
-		grpcAddress = ":9000"
+		grpcAddress = ":9100"
 	}
 
 	grpcSrv := grpc.NewServer(
@@ -56,7 +56,7 @@ func main() {
 	httpAddress := zconfig.GetString("server.http.port")
 
 	if httpAddress == "" {
-		httpAddress = ":8000"
+		httpAddress = ":8100"
 	}
 
 	httpSrv := http.NewServer(

@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package api.user;
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+
+option go_package = "login_registration/api/user;user";
+option java_multiple_files = true;
+option java_package = "api.user";
+
+service User {
+	rpc UserLogin (LoginRequest) returns (LoginReply){
+		option(google.api.http) = {
+			post:"login",
+			body:"*"
+		};
+	}
+	rpc UserRegister(RegisterRequest) returns (RegisterReply){
+			option(google.api.http) = {
+				post:"register",
+				body:"*"
+			};
+	}
+
+}
+
+message LoginRequest {
+	string mobile = 1 [(validate.rules).string = { min_len: 10, max_len: 18 }];
+	string password = 2 [(validate.rules).string = { min_len: 6, max_len: 50 }];
+	string code = 3 [(validate.rules).string = { min_len: 6, max_len: 6 }];
+}
+message LoginReply {}
+message RegisterRequest{
+	string mobile = 1 [(validate.rules).string = { min_len: 10, max_len: 18 }];
+	string password = 2 [(validate.rules).string = { min_len: 6, max_len: 50 }];
+	string code = 3 [(validate.rules).string = { min_len: 6, max_len: 6 }];
+}
+message RegisterReply{
+}

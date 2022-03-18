@@ -21,7 +21,9 @@ func NewUserService(a repository.IUserRepo) IUserService {
 	}
 }
 func (u *userService) Register(ctx context.Context, mobile string, password string, code string) (*entity.Users, error) {
-	//1.判断用户是否已经存在
+	//1.校验参数
+
+	//2.判断用户是否已经存在
 	user, err := u.userRepo.Get(ctx, mobile)
 	if err != nil {
 		return nil, err
@@ -29,5 +31,8 @@ func (u *userService) Register(ctx context.Context, mobile string, password stri
 	if user.Id != 0 {
 		return nil, ecode.ErrUserPhoneRepeat
 	}
+	//3.验证code
+
+	//4.
 	return nil, nil
 }

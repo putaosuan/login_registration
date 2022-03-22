@@ -22,7 +22,9 @@ func NewUserService(a repository.IUserRepo) IUserService {
 }
 func (u *userService) Register(ctx context.Context, mobile string, password string, code string) (*entity.Users, error) {
 	//1.校验参数
-
+	if entity.VerifyMobileFormat(mobile) {
+		return nil, ecode.ErrUserPhoneFailure
+	}
 	//2.判断用户是否已经存在
 	user, err := u.userRepo.Get(ctx, mobile)
 	if err != nil {

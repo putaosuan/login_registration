@@ -36,5 +36,6 @@ func (u *userService) Register(ctx context.Context, mobile string, password stri
 	//3.验证code
 
 	//4.
+
 	return nil, nil
 }

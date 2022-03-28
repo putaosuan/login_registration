@@ -35,7 +35,26 @@ func (u *userService) Register(ctx context.Context, mobile string, password stri
 	}
 	//3.验证code
 
-	//4.
-
+	//4.新增账户
+	//user := &entity.Users{
+	//	Mobile: mobile,
+	//	Passwd: password,
+	//	Ctime:  uint32(int(time.Now().Unix())),
+	//	Status: 1, //账户正常
+	//	Mtime:  time.Now(),
+	//}
+	//user.Passwd, user.Salt = user.Encrypt()
+	//user2, err := u.userRepo.CreateUser(ctx, user)
+	//if err != nil {
+	//	return nil, err
+	//}
+	//trace := &entity.Trace{
+	//	Id:    0,
+	//	Uid:   0,
+	//	Type:  valobj.TraceTypeReg,
+	//	//Ip:    req.,
+	//	Ext:   "",
+	//	Ctime: 0,
+	//}
 	return nil, nil
 }

@@ -1,6 +1,10 @@
 package entity
 
 import (
+	"crypto/sha1"
+	"encoding/hex"
+	"fmt"
+	"login_registration/pkg/util"
 	"regexp"
 	"time"
 )
@@ -18,25 +22,6 @@ type Users struct {
 	Mtime  time.Time // 修改时间
 }
 
-type Trace struct {
-	Id    uint64 // 主键
-	Uid   uint64 // 用户主键
-	Type  int8   // 类型(0:注册1::登录2:退出3:修改4:删除)
-	Ip    uint32 // ip
-	Ext   string // 扩展字段
-	Ctime uint32 // 注册时间
-}
-
-type Device struct {
-	Id     uint64 // 主键
-	Uid    uint64 // 用户主键
-	Client string // 客户端
-	Model  string // 设备型号
-	Ip     uint32 // ip地址
-	Ext    string // 扩展信息
-	Ctime  uint32 // 注册时间
-}
-
 //校验手机号格式
 func VerifyMobileFormat(mobileNum string) bool {
 	regular := "^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}$"
@@ -51,4 +36,16 @@ func VerifyEmailFormat(email string) bool {
 
 	reg := regexp.MustCompile(pattern)
 	return reg.MatchString(email)
+}
+
+/**
+加密
+*/
+
+func (u *Users) Encrypt() (string, string) {
+	salt := util.RandBytes(4)
+	s := sha1.New()
+	s.Write(salt)
+	s.Write([]byte(u.Passwd))
+	return fmt.Sprintf("%s%s", salt, hex.EncodeToString(s.Sum(nil))), string(salt)
 }

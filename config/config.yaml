@@ -4,9 +4,9 @@ application:
 log:
   level: "info"
 
-#database:
-#  "default":
-#    dns:  ""
-#    maxIdleConns: 5
-#    maxOpenConns: 100
-#    mode: "debug"
+database:
+  "default":
+    dns:  "root:123456789@tcp(127.0.0.1:3306)/ssodb?charset=utf8mb4&parseTime=true&loc=Local"
+    maxIdleConns: 5
+    maxOpenConns: 100
+    mode: "debug"

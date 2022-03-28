@@ -87,7 +87,7 @@ func (u *userRepo) toModelTrace(trace *entity.Trace) *model.Trace {
 	return &model.Trace{
 		Id:    trace.Id,
 		Uid:   trace.Uid,
-		Type:  trace.Type,
+		Type:  int8(trace.Type),
 		Ip:    trace.Ip,
 		Ext:   trace.Ext,
 		Ctime: trace.Ctime,

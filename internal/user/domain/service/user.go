@@ -48,21 +48,33 @@ func (u *userService) Register(ctx context.Context, mobile string, password stri
 		Mtime:  time.Now(),
 	}
 	user.Passwd, user.Salt = user.Encrypt()
-	//user2, err := u.userRepo.CreateUser(ctx, user)
-	//if err != nil {
-	//	return nil, err
-	//}
-	fmt.Println(user.Salt)
-	fmt.Println(user.Passwd)
+	user2, err := u.userRepo.CreateUser(ctx, user)
+	if err != nil {
+		return nil, err
+	}
 	trace := &entity.Trace{
-		Id:   0,
-		Uid:  0,
-		Type: valobj.TraceTypeReg,
-		Ip:   uint32(util.IpStringToInt(util.GetRealAddr(ctx))),
-		Ext:  "",
-		//Ctime: user2.Ctime,
+		Id:    0,
+		Uid:   user.Id,
+		Type:  valobj.TraceTypeReg,
+		Ip:    uint32(util.IpStringToInt(util.GetPeerAddr(ctx))),
+		Ext:   "",
+		Ctime: user2.Ctime,
+	}
+	trace2, err := u.userRepo.CreateTrace(ctx, trace)
+	if err != nil {
+		return nil, err
 	}
 	fmt.Println(util.GetPeerAddr(ctx), "----")
 	fmt.Println(trace.Ip)
+	device := &entity.Device{
+		Id:     0,
+		Uid:    user.Id,
+		Client: "",
+		Model:  "",
+		Ip:     trace2.Ip,
+		Ext:    "",
+		Ctime:  user2.Ctime,
+	}
+	_ = device
 	return nil, nil
 }

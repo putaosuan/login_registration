@@ -5,6 +5,7 @@ import (
 	"github.com/go-kirito/pkg/zdb"
 	"login_registration/internal/user/domain/entity"
 	"login_registration/internal/user/repository/model"
+	"time"
 )
 
 type IUserRepo interface {
@@ -30,6 +31,7 @@ func (u *userRepo) Get(ctx context.Context, mobile string) (*entity.Users, error
 }
 func (u *userRepo) CreateUser(ctx context.Context, users *entity.Users) (*entity.Users, error) {
 	user := u.toModelUsers(users)
+	user.Mtime = time.Now()
 	err := zdb.NewOrm(ctx).Create(user).Error()
 	if err != nil {
 		return nil, err
@@ -80,7 +82,6 @@ func (u *userRepo) toModelUsers(users *entity.Users) *model.Users {
 		Ext:    users.Ext,
 		Status: users.Status,
 		Ctime:  users.Ctime,
-		Mtime:  users.Mtime,
 	}
 }
 func (u *userRepo) toModelTrace(trace *entity.Trace) *model.Trace {

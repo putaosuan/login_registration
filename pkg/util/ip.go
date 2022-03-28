@@ -2,7 +2,6 @@ package util
 
 import (
 	"context"
-	"fmt"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
 	"net"
@@ -16,7 +15,6 @@ func GetRealAddr(ctx context.Context) string {
 	if !ok {
 		return "127.0.0.1"
 	}
-	fmt.Println("22222")
 	rips := md.Get("x-real-ip")
 	if len(rips) == 0 {
 		return ""
@@ -28,13 +26,16 @@ func GetRealAddr(ctx context.Context) string {
 // GetPeerAddr get peer addr
 func GetPeerAddr(ctx context.Context) string {
 	var addr string
-	if pr, ok := peer.FromContext(ctx); ok {
-		if tcpAddr, ok := pr.Addr.(*net.TCPAddr); ok {
-			addr = tcpAddr.IP.String()
-		} else {
-			addr = pr.Addr.String()
-		}
+	pr, ok := peer.FromContext(ctx)
+	if !ok {
+		return "127.0.0.1"
 	}
+	if tcpAddr, ok := pr.Addr.(*net.TCPAddr); ok {
+		addr = tcpAddr.IP.String()
+	} else {
+		addr = pr.Addr.String()
+	}
+
 	return addr
 }
 

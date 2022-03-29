@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"fmt"
 	"login_registration/ecode"
 	"login_registration/internal/user/domain/entity"
 	"login_registration/internal/user/domain/valobj"
@@ -53,28 +52,25 @@ func (u *userService) Register(ctx context.Context, mobile string, password stri
 		return nil, err
 	}
 	trace := &entity.Trace{
-		Id:    0,
-		Uid:   user.Id,
+		Uid:   user2.Id,
 		Type:  valobj.TraceTypeReg,
 		Ip:    uint32(util.IpStringToInt(util.GetPeerAddr(ctx))),
-		Ext:   "",
 		Ctime: user2.Ctime,
 	}
 	trace2, err := u.userRepo.CreateTrace(ctx, trace)
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println(util.GetPeerAddr(ctx), "----")
-	fmt.Println(trace.Ip)
 	device := &entity.Device{
-		Id:     0,
-		Uid:    user.Id,
-		Client: "",
-		Model:  "",
-		Ip:     trace2.Ip,
-		Ext:    "",
-		Ctime:  user2.Ctime,
+		Uid:    user2.Id,
+		Client: util.GetUserAgent(ctx),
+		//Model:  "",
+		Ip:    trace2.Ip,
+		Ctime: user2.Ctime,
 	}
-	_ = device
-	return nil, nil
+	_, err = u.userRepo.CreateDevice(ctx, device)
+	if err != nil {
+		return nil, err
+	}
+	return user2, nil
 }

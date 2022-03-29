@@ -36,7 +36,7 @@ func (u *userRepo) CreateUser(ctx context.Context, users *entity.Users) (*entity
 	if err != nil {
 		return nil, err
 	}
-	return users, nil
+	return u.toResp(user), nil
 }
 
 func (u *userRepo) CreateTrace(ctx context.Context, trace *entity.Trace) (*entity.Trace, error) {
@@ -73,7 +73,6 @@ func (u *userRepo) toResp(users *model.Users) *entity.Users {
 }
 func (u *userRepo) toModelUsers(users *entity.Users) *model.Users {
 	return &model.Users{
-		Id:     users.Id,
 		Name:   users.Name,
 		Email:  users.Email,
 		Mobile: users.Mobile,

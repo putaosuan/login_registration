@@ -12,6 +12,7 @@ import (
 
 type IUserService interface {
 	Register(ctx context.Context, mobile string, password string, code string) (*entity.Users, error)
+	SendCode(ctx context.Context, mobile string) error
 }
 type userService struct {
 	userRepo repository.IUserRepo
@@ -73,4 +74,15 @@ func (u *userService) Register(ctx context.Context, mobile string, password stri
 		return nil, err
 	}
 	return user2, nil
+}
+func (u *userService) SendCode(ctx context.Context, mobile string) error {
+	//1.校验参数
+	if !entity.VerifyMobileFormat(mobile) {
+		return ecode.ErrUserPhoneFailure
+	}
+	//2.判断手机号在规定3分钟内时间是否发送过
+
+	//3.生成验证信息，发送
+
+	return nil
 }

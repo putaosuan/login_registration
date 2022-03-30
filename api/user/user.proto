@@ -21,6 +21,12 @@ service User {
 				body:"*"
 			};
 	}
+	rpc UserCode(UserCodeRequest) returns (UserCodeReply){
+		option(google.api.http) = {
+			post:"code",
+			body:"*"
+		};
+	}
 
 }
 
@@ -35,5 +41,8 @@ message RegisterRequest{
 	string password = 2 [(validate.rules).string = { min_len: 6, max_len: 50 }];
 	string code = 3 [(validate.rules).string = { min_len: 6, max_len: 6 }];
 }
-message RegisterReply{
+message RegisterReply{}
+message UserCodeRequest {
+	string mobile = 1 [(validate.rules).string = { min_len: 10, max_len: 18 }];
 }
+message UserCodeReply {}

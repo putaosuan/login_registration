@@ -18,6 +18,7 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 type UserHTTPServer interface {
+	UserCode(context.Context, *UserCodeRequest) (*UserCodeReply, error)
 	UserLogin(context.Context, *LoginRequest) (*LoginReply, error)
 	UserRegister(context.Context, *RegisterRequest) (*RegisterReply, error)
 }
@@ -26,6 +27,7 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r := s.Route("/")
 	r.POST("login", _User_UserLogin0_HTTP_Handler(srv))
 	r.POST("register", _User_UserRegister0_HTTP_Handler(srv))
+	r.POST("code", _User_UserCode0_HTTP_Handler(srv))
 }
 
 func _User_UserLogin0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
@@ -66,7 +68,27 @@ func _User_UserRegister0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context)
 	}
 }
 
+func _User_UserCode0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UserCodeRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, "/api.user.User/UserCode")
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UserCode(ctx, req.(*UserCodeRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UserCodeReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type UserHTTPClient interface {
+	UserCode(ctx context.Context, req *UserCodeRequest, opts ...http.CallOption) (rsp *UserCodeReply, err error)
 	UserLogin(ctx context.Context, req *LoginRequest, opts ...http.CallOption) (rsp *LoginReply, err error)
 	UserRegister(ctx context.Context, req *RegisterRequest, opts ...http.CallOption) (rsp *RegisterReply, err error)
 }
@@ -77,6 +99,19 @@ type UserHTTPClientImpl struct {
 
 func NewUserHTTPClient(client *http.Client) UserHTTPClient {
 	return &UserHTTPClientImpl{client}
+}
+
+func (c *UserHTTPClientImpl) UserCode(ctx context.Context, in *UserCodeRequest, opts ...http.CallOption) (*UserCodeReply, error) {
+	var out UserCodeReply
+	pattern := "code"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation("/api.user.User/UserCode"))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
 }
 
 func (c *UserHTTPClientImpl) UserLogin(ctx context.Context, in *LoginRequest, opts ...http.CallOption) (*LoginReply, error) {

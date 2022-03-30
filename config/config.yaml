@@ -10,3 +10,10 @@ database:
     maxIdleConns: 5
     maxOpenConns: 100
     mode: "debug"
+cache:
+  driver: "redis"
+
+redis:
+  addr: "127.0.0.1:6379"
+  password: ""
+  db: 0

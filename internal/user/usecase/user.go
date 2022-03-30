@@ -36,3 +36,12 @@ func (s *UserUseCase) UserRegister(ctx context.Context, req *pb.RegisterRequest)
 	}
 	return &pb.RegisterReply{}, nil
 }
+func (s *UserUseCase) UserCode(ctx context.Context, req *pb.UserCodeRequest) (*pb.UserCodeReply, error) {
+	if err := req.Validate(); err != nil {
+		if err := req.Validate(); err != nil {
+			ecode.ErrValidateFail.Message = err.Error()
+			return nil, ecode.ErrValidateFail
+		}
+	}
+	panic("implement me")
+}

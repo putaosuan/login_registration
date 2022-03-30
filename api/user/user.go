@@ -15,6 +15,7 @@ import (
 type IUserUseCase interface {
 	UserLogin(context.Context, *LoginRequest) (*LoginReply, error)
 	UserRegister(context.Context, *RegisterRequest) (*RegisterReply, error)
+	UserCode(context.Context, *UserCodeRequest) (*UserCodeReply, error)
 }
 
 // @di di文件根据注解自动生成

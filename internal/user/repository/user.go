@@ -3,8 +3,8 @@ package repository
 import (
 	"context"
 	"github.com/go-kirito/pkg/zdb"
-	"login_registration/internal/user/domain/entity"
-	"login_registration/internal/user/repository/model"
+	"my_sso/internal/user/domain/entity"
+	"my_sso/internal/user/repository/model"
 	"time"
 )
 

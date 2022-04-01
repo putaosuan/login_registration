@@ -2,7 +2,7 @@ package repository
 
 import (
 	"context"
-	"login_registration/pkg/zcache"
+	"my_sso/pkg/zcache"
 	"time"
 )
 

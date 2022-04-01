@@ -1,7 +1,7 @@
 package entity
 
 import (
-	"login_registration/internal/user/domain/valobj"
+	"my_sso/internal/user/domain/valobj"
 )
 
 type Trace struct {

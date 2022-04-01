@@ -4,7 +4,7 @@ import (
 	"flag"
 	"log"
 
-	"login_registration/di"
+	"my_sso/di"
 
 	"github.com/go-kirito/pkg/util/response"
 

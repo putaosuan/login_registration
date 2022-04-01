@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"login_registration/pkg/zcache/redis"
+	"my_sso/pkg/zcache/redis"
 
 	"github.com/go-kirito/pkg/zconfig"
 	"github.com/go-kirito/pkg/zlog"

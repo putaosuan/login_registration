@@ -1,4 +1,4 @@
-module login_registration
+module my_sso
 
 go 1.16
 

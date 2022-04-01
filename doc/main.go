@@ -10,7 +10,7 @@ import (
 	"log"
 	"os"
 
-	_ "login_registration/ecode"
+	_ "my_sso/ecode"
 
 	"github.com/go-kirito/pkg/errors"
 )

@@ -3,10 +3,10 @@ package usecase
 import (
 	"context"
 	"fmt"
-	"login_registration/ecode"
-	"login_registration/internal/user/domain/service"
+	"my_sso/ecode"
+	"my_sso/internal/user/domain/service"
 
-	pb "login_registration/api/user"
+	pb "my_sso/api/user"
 )
 
 type UserUseCase struct {

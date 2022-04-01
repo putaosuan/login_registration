@@ -2,11 +2,11 @@ package service
 
 import (
 	"context"
-	"login_registration/ecode"
-	"login_registration/internal/user/domain/entity"
-	"login_registration/internal/user/domain/valobj"
-	"login_registration/internal/user/repository"
-	"login_registration/pkg/util"
+	"my_sso/ecode"
+	"my_sso/internal/user/domain/entity"
+	"my_sso/internal/user/domain/valobj"
+	"my_sso/internal/user/repository"
+	"my_sso/pkg/util"
 	"time"
 )
 

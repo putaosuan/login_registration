@@ -4,7 +4,7 @@ import (
 	"crypto/sha1"
 	"encoding/hex"
 	"fmt"
-	"login_registration/pkg/util"
+	"my_sso/pkg/util"
 	"regexp"
 	"time"
 )

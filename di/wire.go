@@ -5,11 +5,11 @@
 package di
 
 import (
-	user0 "login_registration/api/user"
+	user0 "my_sso/api/user"
 
-	service_0 "login_registration/internal/user/domain/service"
-	repository_0 "login_registration/internal/user/repository"
-	usecase_0 "login_registration/internal/user/usecase"
+	service_0 "my_sso/internal/user/domain/service"
+	repository_0 "my_sso/internal/user/repository"
+	usecase_0 "my_sso/internal/user/usecase"
 
 	"github.com/go-kirito/pkg/application"
 	"github.com/google/wire"
@@ -33,9 +33,9 @@ func MakeUseCase() (*UseCases, error) {
 	panic(wire.Build(
 		wire.Struct(new(UseCases), "*"),
 
-		usecase_0.NewUserUseCase,
 		service_0.NewUserService,
 		repository_0.NewUserRepo,
 		repository_0.NewUserCacheRepo,
+		usecase_0.NewUserUseCase,
 	))
 }

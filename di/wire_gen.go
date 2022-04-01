@@ -8,10 +8,10 @@ package di
 
 import (
 	"github.com/go-kirito/pkg/application"
-	"login_registration/api/user"
-	"login_registration/internal/user/domain/service"
-	"login_registration/internal/user/repository"
-	"login_registration/internal/user/usecase"
+	"my_sso/api/user"
+	"my_sso/internal/user/domain/service"
+	"my_sso/internal/user/repository"
+	"my_sso/internal/user/usecase"
 )
 
 // Injectors from wire.go:

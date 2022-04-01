@@ -11,11 +11,14 @@ import (
 	"github.com/go-kirito/pkg/zdb"
 
 	"github.com/go-kirito/pkg/application"
+	"github.com/go-kirito/pkg/middleware/auth/jwt"
 	"github.com/go-kirito/pkg/middleware/recovery"
+	"github.com/go-kirito/pkg/middleware/selector"
 	"github.com/go-kirito/pkg/transport/grpc"
 	"github.com/go-kirito/pkg/transport/http"
 	"github.com/go-kirito/pkg/zconfig"
 	"github.com/go-kirito/pkg/zlog"
+	jwtv4 "github.com/golang-jwt/jwt/v4"
 )
 
 var config string
@@ -65,6 +68,18 @@ func main() {
 		http.ErrorEncoder(response.ErrorEncoder),
 		http.Middleware(
 			recovery.Recovery(),
+			selector.Server(
+				jwt.Server(func(token *jwtv4.Token) (interface{}, error) {
+					appKey := zconfig.GetString("application.appKey")
+					return []byte(appKey), nil
+				}),
+			).Match(func(operation string) bool {
+				//login user 不进行token验证
+				if operation == "/api.user.User/UserLogin" || operation == "/api.user.User/UserCode" || operation == "/api.user.User/UserRegister" {
+					return false
+				}
+				return true
+			}).Build(),
 		),
 	)
 

@@ -1,5 +1,6 @@
 application:
   environment: "dev"
+  appKey: "zhangleissokey"
 
 log:
   level: "info"

@@ -33,9 +33,9 @@ func MakeUseCase() (*UseCases, error) {
 	panic(wire.Build(
 		wire.Struct(new(UseCases), "*"),
 
-		service_0.NewUserService,
 		repository_0.NewUserRepo,
 		repository_0.NewUserCacheRepo,
 		usecase_0.NewUserUseCase,
+		service_0.NewUserService,
 	))
 }

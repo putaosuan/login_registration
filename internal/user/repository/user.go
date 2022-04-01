@@ -9,10 +9,11 @@ import (
 )
 
 type IUserRepo interface {
-	Get(ctx context.Context, mobile string) (*entity.Users, error)
+	GetByMobile(ctx context.Context, mobile string) (*entity.Users, error)
 	CreateUser(ctx context.Context, users *entity.Users) (*entity.Users, error)
 	CreateTrace(ctx context.Context, trace *entity.Trace) (*entity.Trace, error)
 	CreateDevice(ctx context.Context, device *entity.Device) (*entity.Device, error)
+	Get(ctx context.Context, id int64) (*entity.Users, error)
 }
 type userRepo struct {
 }
@@ -21,7 +22,18 @@ type userRepo struct {
 func NewUserRepo() IUserRepo {
 	return &userRepo{}
 }
-func (u *userRepo) Get(ctx context.Context, mobile string) (*entity.Users, error) {
+
+func (u *userRepo) Get(ctx context.Context, id int64) (*entity.Users, error) {
+	user := &model.Users{}
+	err := zdb.NewOrm(ctx).Where("id = ?", id).Find(user).Error()
+	if err != nil {
+		return nil, err
+	}
+
+	return u.toResp(user), nil
+}
+
+func (u *userRepo) GetByMobile(ctx context.Context, mobile string) (*entity.Users, error) {
 	user := &model.Users{}
 	err := zdb.NewOrm(ctx).Where("mobile = ?", mobile).Find(user).Error()
 	if err != nil {

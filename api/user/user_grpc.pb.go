@@ -25,6 +25,7 @@ type UserClient interface {
 	UserLogin(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginReply, error)
 	UserRegister(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterReply, error)
 	UserCode(ctx context.Context, in *UserCodeRequest, opts ...grpc.CallOption) (*UserCodeReply, error)
+	UserGet(ctx context.Context, in *UserGetRequest, opts ...grpc.CallOption) (*UserGetReply, error)
 }
 
 type userClient struct {
@@ -62,6 +63,15 @@ func (c *userClient) UserCode(ctx context.Context, in *UserCodeRequest, opts ...
 	return out, nil
 }
 
+func (c *userClient) UserGet(ctx context.Context, in *UserGetRequest, opts ...grpc.CallOption) (*UserGetReply, error) {
+	out := new(UserGetReply)
+	err := c.cc.Invoke(ctx, "/api.user.User/UserGet", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations should embed UnimplementedUserServer
 // for forward compatibility
@@ -69,6 +79,7 @@ type UserServer interface {
 	UserLogin(context.Context, *LoginRequest) (*LoginReply, error)
 	UserRegister(context.Context, *RegisterRequest) (*RegisterReply, error)
 	UserCode(context.Context, *UserCodeRequest) (*UserCodeReply, error)
+	UserGet(context.Context, *UserGetRequest) (*UserGetReply, error)
 }
 
 // UnimplementedUserServer should be embedded to have forward compatible implementations.
@@ -83,6 +94,9 @@ func (UnimplementedUserServer) UserRegister(context.Context, *RegisterRequest) (
 }
 func (UnimplementedUserServer) UserCode(context.Context, *UserCodeRequest) (*UserCodeReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserCode not implemented")
+}
+func (UnimplementedUserServer) UserGet(context.Context, *UserGetRequest) (*UserGetReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserGet not implemented")
 }
 
 // UnsafeUserServer may be embedded to opt out of forward compatibility for this service.
@@ -150,6 +164,24 @@ func _User_UserCode_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_UserGet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserGetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UserGet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.user.User/UserGet",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UserGet(ctx, req.(*UserGetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -168,6 +200,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UserCode",
 			Handler:    _User_UserCode_Handler,
+		},
+		{
+			MethodName: "UserGet",
+			Handler:    _User_UserGet_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

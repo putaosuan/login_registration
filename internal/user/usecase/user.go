@@ -65,3 +65,15 @@ func (s *UserUseCase) UserCode(ctx context.Context, req *pb.UserCodeRequest) (*p
 	}
 	return &pb.UserCodeReply{}, nil
 }
+func (s *UserUseCase) UserGet(ctx context.Context, req *pb.UserGetRequest) (*pb.UserGetReply, error) {
+	user, err := s.userService.Get(ctx, req.Id)
+	if err != nil {
+		return &pb.UserGetReply{}, err
+	}
+	return &pb.UserGetReply{
+		Id:     int64(user.Id),
+		Name:   user.Name,
+		Email:  user.Email,
+		Mobile: user.Mobile,
+	}, nil
+}

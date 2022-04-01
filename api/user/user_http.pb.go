@@ -19,6 +19,7 @@ const _ = http.SupportPackageIsVersion1
 
 type UserHTTPServer interface {
 	UserCode(context.Context, *UserCodeRequest) (*UserCodeReply, error)
+	UserGet(context.Context, *UserGetRequest) (*UserGetReply, error)
 	UserLogin(context.Context, *LoginRequest) (*LoginReply, error)
 	UserRegister(context.Context, *RegisterRequest) (*RegisterReply, error)
 }
@@ -28,6 +29,7 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("login", _User_UserLogin0_HTTP_Handler(srv))
 	r.POST("register", _User_UserRegister0_HTTP_Handler(srv))
 	r.POST("code", _User_UserCode0_HTTP_Handler(srv))
+	r.GET("user/{id}", _User_UserGet0_HTTP_Handler(srv))
 }
 
 func _User_UserLogin0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
@@ -87,8 +89,31 @@ func _User_UserCode0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) err
 	}
 }
 
+func _User_UserGet0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UserGetRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, "/api.user.User/UserGet")
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UserGet(ctx, req.(*UserGetRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UserGetReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type UserHTTPClient interface {
 	UserCode(ctx context.Context, req *UserCodeRequest, opts ...http.CallOption) (rsp *UserCodeReply, err error)
+	UserGet(ctx context.Context, req *UserGetRequest, opts ...http.CallOption) (rsp *UserGetReply, err error)
 	UserLogin(ctx context.Context, req *LoginRequest, opts ...http.CallOption) (rsp *LoginReply, err error)
 	UserRegister(ctx context.Context, req *RegisterRequest, opts ...http.CallOption) (rsp *RegisterReply, err error)
 }
@@ -108,6 +133,19 @@ func (c *UserHTTPClientImpl) UserCode(ctx context.Context, in *UserCodeRequest, 
 	opts = append(opts, http.Operation("/api.user.User/UserCode"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *UserHTTPClientImpl) UserGet(ctx context.Context, in *UserGetRequest, opts ...http.CallOption) (*UserGetReply, error) {
+	var out UserGetReply
+	pattern := "user/{id}"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation("/api.user.User/UserGet"))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

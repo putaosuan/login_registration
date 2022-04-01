@@ -4,7 +4,7 @@ package api.user;
 import "google/api/annotations.proto";
 import "validate/validate.proto";
 
-option go_package = "login_registration/api/user;user";
+option go_package = "my_sso/api/user;user";
 option java_multiple_files = true;
 option java_package = "api.user";
 
@@ -25,6 +25,11 @@ service User {
 		option(google.api.http) = {
 			post:"code",
 			body:"*"
+		};
+	}
+	rpc UserGet(UserGetRequest) returns (UserGetReply){
+		option(google.api.http) = {
+			get:"user/{id}"
 		};
 	}
 
@@ -51,3 +56,12 @@ message UserCodeRequest {
 	string mobile = 1 [(validate.rules).string = { min_len: 10, max_len: 18 }];
 }
 message UserCodeReply {}
+message UserGetRequest{
+	int64 id = 1;
+}
+message UserGetReply {
+	int64 id = 1;
+	string name = 2;
+	string email  = 3;
+	string mobile = 4;
+}

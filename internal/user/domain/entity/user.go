@@ -49,3 +49,16 @@ func (u *Users) Encrypt() (string, string) {
 	s.Write([]byte(u.Passwd))
 	return fmt.Sprintf("%s%s", salt, hex.EncodeToString(s.Sum(nil))), string(salt)
 }
+
+/**
+校验密码
+*/
+
+func (u *Users) VerifyEncryptPassword(password string, encryptPassword string) bool {
+	salt := encryptPassword[0:4]
+	s := sha1.New()
+	s.Write([]byte(salt))
+	s.Write([]byte(password))
+	password = fmt.Sprintf("%s%s", salt, hex.EncodeToString(s.Sum(nil)))
+	return password == encryptPassword
+}

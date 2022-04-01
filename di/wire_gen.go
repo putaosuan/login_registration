@@ -18,7 +18,8 @@ import (
 
 func MakeUseCase() (*UseCases, error) {
 	iUserRepo := repository.NewUserRepo()
-	iUserService := service.NewUserService(iUserRepo)
+	iUserCacheRepo := repository.NewUserCacheRepo()
+	iUserService := service.NewUserService(iUserRepo, iUserCacheRepo)
 	iUserUseCase := usecase.NewUserUseCase(iUserService)
 	useCases := &UseCases{
 		iuserusecase0: iUserUseCase,

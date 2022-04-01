@@ -79,18 +79,6 @@ func (m *LoginRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if utf8.RuneCountInString(m.GetCode()) != 6 {
-		err := LoginRequestValidationError{
-			field:  "Code",
-			reason: "value length must be 6 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-
-	}
-
 	if len(errors) > 0 {
 		return LoginRequestMultiError(errors)
 	}
@@ -189,6 +177,16 @@ func (m *LoginReply) validate(all bool) error {
 	}
 
 	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for Name
+
+	// no validation rules for Email
+
+	// no validation rules for Mobile
+
+	// no validation rules for Token
 
 	if len(errors) > 0 {
 		return LoginReplyMultiError(errors)
